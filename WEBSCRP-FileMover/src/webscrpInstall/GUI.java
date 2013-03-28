@@ -15,8 +15,10 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
-    
-    public GUI() {
+    private static Console console;
+
+    public GUI(Console c) {
+        console = c;
         initComponents();
     }
 
@@ -103,42 +105,62 @@ public class GUI extends javax.swing.JFrame {
 
     private void installActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installActionPerformed
         // INSTALL THE WEBSCRP!
+        progress.setValue(0); // init progress bar
         long start = System.currentTimeMillis();
 
         // update progress bar after each step
 
         // get new directory
-        Console console = new Console();
-        console.main(null);
-        
+
+        //console.main(null); // as soon as it opens, it seems to do it's own thing
+
+        // use java console for now!
+
         File dirToCopy = fileChooser.getSelectedFile(); // this is the file!
         try {
-            console.consoleOutLn(dirToCopy.getCanonicalPath()); // will write to insalation console
-            progress.setValue(7); // update progress bar
+
+
+            //System.out.println(dirToCopy.getCanonicalPath()); // will write to insalation console
             
             String dirString = dirToCopy.getCanonicalPath();
             
-            String[] splitDirString = dirString.split("/");
+            progress.setValue(7); // update progress bar
 
-            // check if it's htdocs
 
-            // copy current htdocs data
+            String[] splitDirString = dirString.split("\\\\"); // regex for backslash
+            int len = splitDirString.length;
+            String fileName = splitDirString[len - 1];
 
-            // paste to new directory
+            if (fileName.equals("htdocs")) {
+                progress.setValue(18); // update progress bar
 
-            // installation complete message
+                // check if it's htdocs
 
-            progress.setValue(100);
-            long end = System.currentTimeMillis();
-            long timeElapsed = end - start;
-            popUp.showMessageDialog(null, "WEBSCRP Installation Complete! \n Time Elapsed:" + timeElapsed + "milliseconds", "w00!", 2);
+                // copy current htdocs data
+
+                // paste to new directory
+
+                // installation complete message
+
+                progress.setValue(100);
+                long end = System.currentTimeMillis();
+                long timeElapsed = end - start;
+                popUp.showMessageDialog(null, "WEBSCRP Installation Complete! \n Time Elapsed:" + timeElapsed + "milliseconds", "w00!", 2);
+            } else {
+                popUp.showMessageDialog(null, "Invalid File Chosen, Please Select htdocs", "ERROR: File Not /htdocs", 0);
+            }
 
         } catch (Exception e) {
             // no file selected
             popUp.showMessageDialog(null, "No File Chosen, Please Select A File", "ERROR: No File Chosen", 0);
             // exit method, wait for new event
+
         }
-        console.dispose(); // close console
+
+        //console.close(); // exit console
+
+
+
 
 
     }//GEN-LAST:event_installActionPerformed
@@ -173,7 +195,7 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                new GUI(console).setVisible(true);
             }
         });
     }

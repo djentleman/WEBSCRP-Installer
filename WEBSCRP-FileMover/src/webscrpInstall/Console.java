@@ -17,14 +17,14 @@ public class Console extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void consoleOutLn(String stringToAdd) {
+    public void outLn(String stringToAdd) {
         // print to console w/ new line
         String currentText = console.getText();
         String newText = currentText + "\n" + stringToAdd;
         console.setText(newText);
     }
 
-    public void consoleOut(String stringToAdd) {
+    public void out(String stringToAdd) {
         // print to console
         String currentText = console.getText();
         String newText = currentText + stringToAdd;
@@ -33,6 +33,10 @@ public class Console extends javax.swing.JFrame {
     
     public void clear(){
         console.setText(""); // clears console
+    }
+    
+    public void close(){
+        this.dispose();
     }
 
     /**
@@ -52,6 +56,7 @@ public class Console extends javax.swing.JFrame {
 
         console.setBackground(new java.awt.Color(0, 0, 0));
         console.setColumns(20);
+        console.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         console.setForeground(new java.awt.Color(255, 255, 255));
         console.setRows(5);
         console.setText("WEBSCRP INSTLATION CONSOLE\n");
