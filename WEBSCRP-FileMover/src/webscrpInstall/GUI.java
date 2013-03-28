@@ -15,6 +15,7 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
+    
     public GUI() {
         initComponents();
     }
@@ -107,10 +108,17 @@ public class GUI extends javax.swing.JFrame {
         // update progress bar after each step
 
         // get new directory
+        Console console = new Console();
+        console.main(null);
+        
         File dirToCopy = fileChooser.getSelectedFile(); // this is the file!
         try {
-            System.out.println(dirToCopy.getCanonicalPath());
-            progress.setValue(7);
+            console.consoleOutLn(dirToCopy.getCanonicalPath()); // will write to insalation console
+            progress.setValue(7); // update progress bar
+            
+            String dirString = dirToCopy.getCanonicalPath();
+            
+            String[] splitDirString = dirString.split("/");
 
             // check if it's htdocs
 
@@ -130,6 +138,7 @@ public class GUI extends javax.swing.JFrame {
             popUp.showMessageDialog(null, "No File Chosen, Please Select A File", "ERROR: No File Chosen", 0);
             // exit method, wait for new event
         }
+        console.dispose(); // close console
 
 
     }//GEN-LAST:event_installActionPerformed
