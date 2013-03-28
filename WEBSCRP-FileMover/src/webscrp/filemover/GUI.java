@@ -26,13 +26,13 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        popUp = new javax.swing.JOptionPane();
         fileChooser = new javax.swing.JFileChooser();
         install = new javax.swing.JButton();
         lblLocate = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
-
-        jButton1.setText("jButton1");
+        progress = new javax.swing.JProgressBar();
+        lblProgress = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEBSCRP Installer");
@@ -41,27 +41,41 @@ public class GUI extends javax.swing.JFrame {
         fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         install.setText("Install");
+        install.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                installActionPerformed(evt);
+            }
+        });
 
-        lblLocate.setText("please locate htdocs:");
+        lblLocate.setText("Please locate htdocs:");
 
         title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("WEBSCRP Installer");
+
+        lblProgress.setText("Progress:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(lblProgress)
+                .addGap(18, 18, 18)
+                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(install)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLocate)
-                    .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLocate)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -74,12 +88,35 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(install)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(install)
+                    .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProgress))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void installActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installActionPerformed
+        // INSTALL THE WEBSCRP!
+        
+        // update progress bar after each step
+        
+        // get new directory
+        
+        // check if it's htdocs
+        
+        // copy current htdocs data
+        
+        // paste to new directory
+        
+        // installation complete message
+        
+        progress.setValue(100);
+        popUp.showMessageDialog(null, "WEBSCRP Installation Complete!");
+        
+    }//GEN-LAST:event_installActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,8 +155,10 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JButton install;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblLocate;
+    private javax.swing.JLabel lblProgress;
+    private javax.swing.JOptionPane popUp;
+    private javax.swing.JProgressBar progress;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
