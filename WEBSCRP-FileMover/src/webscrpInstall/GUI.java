@@ -36,8 +36,8 @@ public class GUI extends javax.swing.JFrame {
         String currentText = console.getText();
         console.setText(currentText + "\n>" + message);
     }
-    
-    private void update(String message){
+
+    private void update(String message) {
         consoleWriteLn(message);
         currentAction.setText(message);
     }
@@ -95,7 +95,7 @@ public class GUI extends javax.swing.JFrame {
             fileWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fileWrapLayout.createSequentialGroup()
                 .addGroup(fileWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                    .addComponent(fileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                     .addGroup(fileWrapLayout.createSequentialGroup()
                         .addComponent(lblLocate)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -125,7 +125,7 @@ public class GUI extends javax.swing.JFrame {
         logWrap.setLayout(logWrapLayout);
         logWrapLayout.setHorizontalGroup(
             logWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
         );
         logWrapLayout.setVerticalGroup(
             logWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,24 +138,18 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(title, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tabbedPain)
-                                    .addComponent(progress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(lblProgress)
-                                .addGap(42, 42, 42)
-                                .addComponent(currentAction, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(install)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblProgress)
+                        .addGap(42, 42, 42)
+                        .addComponent(currentAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(install))
+                    .addComponent(tabbedPain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+                    .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -207,9 +201,7 @@ public class GUI extends javax.swing.JFrame {
     private boolean isHtdocs(File target) {
         String path = target.getAbsolutePath();
         update("Checking '" + path + "' for htdocs");
-        String[] splitDirString = path.split("\\\\"); // regex for backslash
-        int len = splitDirString.length;
-        String fileName = splitDirString[len - 1];
+        String fileName = target.getName();
         if (fileName.equals("htdocs")) {
             progress.setValue(8);
             return true;
@@ -242,7 +234,9 @@ public class GUI extends javax.swing.JFrame {
                 update("Directory Found: " + currentPath);
                 progress.setValue(10);
                 payload = currentFile;
-                return true;
+                if (probePayload()) {
+                    return true;
+                }
             }
         }
 
@@ -252,6 +246,67 @@ public class GUI extends javax.swing.JFrame {
         return false;
 
 
+    }
+
+    private boolean probePayload() {
+        // check if payload is correct file
+        String path = payload.getAbsolutePath();
+        update("Probing: " + path);
+        File probe1 = new File(path + "/index.php");
+        File probe2 = new File(path + "/scripts");
+        update("Checking: " + path + "\\index.php");
+        if (probe1.exists()) {
+            update("Checking: " + path + "\\scripts\\");
+            if (probe2.exists()) {
+                return true;
+            } else {
+                update(path + "\\scripts\\ not found");
+            }
+        } else {
+            update(path + "\\index.php not found");
+        }
+        update("Probing Failed, Continue Scanning");
+        return false;
+    }
+
+    private void moveFiles(File payload, File target) {
+        File[] files = payload.listFiles();
+        int len = files.length;
+        int chunkSize = 90 / len;
+        for (File currentFile : files) {
+            String name = currentFile.getName();
+            if (currentFile.isDirectory() == false) {
+                // not dir
+                // direct copy
+                File dest = new File(target + "\\" + name);
+                update("Copying '" + currentFile.getAbsolutePath() + "'\nTo '" + dest);
+                // do the copying:
+                //Use bytes stream to support all file types
+                try {
+                    InputStream in = new FileInputStream(currentFile);
+                    OutputStream out = new FileOutputStream(dest);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    //copy the file content in bytes 
+                    while ((length = in.read(buffer)) > 0) {
+                        out.write(buffer, 0, length);
+                    }
+                    in.close();
+                    out.close();
+                } catch (Exception e) {
+                }
+            } else {
+                // is a directory
+                String currentDirName = target.getAbsolutePath() + "\\" + name;
+                File currentDir = new File(currentDirName);
+                if (currentDir.exists() == false){
+                    update("Creating Directory: " + currentDir.getAbsolutePath());
+                    currentDir.mkdir();
+                }
+                moveFiles(currentFile, currentDir);
+            }
+         progress.setValue(progress.getValue() + chunkSize);
+        }
     }
 
     private void installActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installActionPerformed
@@ -264,9 +319,7 @@ public class GUI extends javax.swing.JFrame {
             File target = getSelectedFile();
             if (isHtdocs(target)) {
                 if (directoryExists()) {
-                    // payload is now assigned
-                    // integigate payload
-                    // copy files
+                    moveFiles(payload, target);
                     progress.setValue(100);
                     long end = System.currentTimeMillis();
                     long elapsed = end - start;
