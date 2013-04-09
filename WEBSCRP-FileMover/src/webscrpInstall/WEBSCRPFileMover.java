@@ -15,8 +15,7 @@ public class WEBSCRPFileMover {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Console c = new Console();
-        GUI gui = new GUI(c); // init gui
+        GUI gui = new GUI(); // init gui
         gui.main(null);
     }
 }
