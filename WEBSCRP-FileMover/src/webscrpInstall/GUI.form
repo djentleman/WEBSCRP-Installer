@@ -4,8 +4,6 @@
   <NonVisualComponents>
     <Component class="javax.swing.JOptionPane" name="popUp">
     </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
-    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -40,7 +38,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="install" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="tabbedPain" alignment="1" pref="634" max="32767" attributes="0"/>
+                  <Component id="tabbedPain" alignment="1" max="32767" attributes="0"/>
                   <Component id="progress" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

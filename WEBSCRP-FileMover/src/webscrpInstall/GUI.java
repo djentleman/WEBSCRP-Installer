@@ -52,7 +52,6 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         popUp = new javax.swing.JOptionPane();
-        jProgressBar1 = new javax.swing.JProgressBar();
         install = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         progress = new javax.swing.JProgressBar();
@@ -148,7 +147,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(currentAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(install))
-                    .addComponent(tabbedPain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+                    .addComponent(tabbedPain, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -299,13 +298,13 @@ public class GUI extends javax.swing.JFrame {
                 // is a directory
                 String currentDirName = target.getAbsolutePath() + "\\" + name;
                 File currentDir = new File(currentDirName);
-                if (currentDir.exists() == false){
+                if (currentDir.exists() == false) {
                     update("Creating Directory: " + currentDir.getAbsolutePath());
                     currentDir.mkdir();
                 }
                 moveFiles(currentFile, currentDir);
             }
-         progress.setValue(progress.getValue() + chunkSize);
+            progress.setValue(progress.getValue() + chunkSize);
         }
     }
 
@@ -325,6 +324,10 @@ public class GUI extends javax.swing.JFrame {
                     long elapsed = end - start;
 
                     update("Install Complete, Time Elapsed:" + String.valueOf(elapsed) + "ms");
+                    int close = popUp.showConfirmDialog(null, "Installation Complete \nWould You Like To Close The Installer", "Installation Complete", popUp.YES_NO_OPTION);
+                    if (close == 0){
+                        System.exit(0); // close
+                    }
                 }
 
 
@@ -384,7 +387,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JPanel fileWrap;
     private javax.swing.JButton install;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLocate;
     private javax.swing.JLabel lblProgress;
