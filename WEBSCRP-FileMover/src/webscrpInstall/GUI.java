@@ -252,15 +252,10 @@ public class GUI extends javax.swing.JFrame {
         String path = payload.getAbsolutePath();
         update("Probing: " + path);
         File probe1 = new File(path + "/index.php");
-        File probe2 = new File(path + "/scripts");
+        File probe2 = new File(path + "/index.html");
         update("Checking: " + path + "\\index.php");
-        if (probe1.exists()) {
-            update("Checking: " + path + "\\scripts\\");
-            if (probe2.exists()) {
-                return true;
-            } else {
-                update(path + "\\scripts\\ not found");
-            }
+        if (probe1.exists() || probe2.exists()) {
+            return true;
         } else {
             update(path + "\\index.php not found");
         }
@@ -325,7 +320,7 @@ public class GUI extends javax.swing.JFrame {
 
                     update("Install Complete, Time Elapsed:" + String.valueOf(elapsed) + "ms");
                     int close = popUp.showConfirmDialog(null, "Installation Complete \nWould You Like To Close The Installer", "Installation Complete", popUp.YES_NO_OPTION);
-                    if (close == 0){
+                    if (close == 0) {
                         System.exit(0); // close
                     }
                 }
