@@ -18,9 +18,11 @@ public class GUI extends javax.swing.JFrame {
      */
     private File payload;
     private String hemis; // HEMIS number, defaults as 612136
+    private boolean scanFlag; // if true, scan directories
 
     public GUI() {
         hemis = "612136";
+        scanFlag = true; // default as true
         initComponents();
     }
 
@@ -74,7 +76,10 @@ public class GUI extends javax.swing.JFrame {
         btnApply = new javax.swing.JButton();
         hemisFlag = new javax.swing.JLabel();
         lblHemis1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        scanCheckBox = new javax.swing.JCheckBox();
+        jSeparator2 = new javax.swing.JSeparator();
+        lblCDloc = new javax.swing.JLabel();
+        cdLocation = new javax.swing.JTextField();
         buildInfoWrap = new javax.swing.JPanel();
         titleConfig1 = new javax.swing.JLabel();
         lblVersion = new javax.swing.JLabel();
@@ -177,12 +182,25 @@ public class GUI extends javax.swing.JFrame {
 
         lblHemis1.setText("Status:");
 
+        scanCheckBox.setSelected(true);
+        scanCheckBox.setText("Scan For CD Directory");
+        scanCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scanCheckBoxActionPerformed(evt);
+            }
+        });
+
+        lblCDloc.setText("CD Location:");
+
+        cdLocation.setText("D:/");
+        cdLocation.setEnabled(false);
+
         javax.swing.GroupLayout configLayout = new javax.swing.GroupLayout(config);
         config.setLayout(configLayout);
         configLayout.setHorizontalGroup(
             configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleConfig, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+            .addGroup(configLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
@@ -190,12 +208,21 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(hemisNo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnApply))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
                         .addComponent(lblHemis1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hemisFlag, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)))
+                        .addComponent(hemisFlag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(63, 63, 63))
+                    .addComponent(jSeparator2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+                                .addComponent(scanCheckBox)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCDloc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cdLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnApply, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         configLayout.setVerticalGroup(
@@ -211,9 +238,16 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hemisFlag)
                     .addComponent(lblHemis1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
                 .addComponent(btnApply)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(scanCheckBox)
+                    .addComponent(lblCDloc)
+                    .addComponent(cdLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         titleConfig1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -222,7 +256,7 @@ public class GUI extends javax.swing.JFrame {
 
         lblVersion.setText("Version:");
 
-        versionNo.setText("1.1.1");
+        versionNo.setText("1.1.2");
 
         lblRelease.setText("Release:");
 
@@ -245,14 +279,13 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, buildInfoWrapLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(buildInfoWrapLayout.createSequentialGroup()
-                                .addComponent(lblVersion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(versionNo))
-                            .addGroup(buildInfoWrapLayout.createSequentialGroup()
-                                .addComponent(lblRelease)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                                .addComponent(releaseDate))))
+                            .addComponent(lblRelease)
+                            .addComponent(lblVersion))
+                        .addGap(18, 18, 18)
+                        .addGroup(buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(versionNo)
+                            .addComponent(releaseDate))
+                        .addGap(0, 23, Short.MAX_VALUE))
                     .addComponent(tp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -271,8 +304,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(releaseDate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(year))
+                .addGap(7, 7, 7)
+                .addComponent(year)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout configWrapLayout = new javax.swing.GroupLayout(configWrap);
@@ -281,15 +315,12 @@ public class GUI extends javax.swing.JFrame {
             configWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(configWrapLayout.createSequentialGroup()
                 .addComponent(config, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buildInfoWrap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         configWrapLayout.setVerticalGroup(
             configWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(config, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
             .addComponent(buildInfoWrap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -380,39 +411,57 @@ public class GUI extends javax.swing.JFrame {
     private boolean directoryExists() {
         // scan C - K of possible locations (it's likely to be ina  drive past K
         ArrayList<File> potentialFiles = new ArrayList<File>();
+        if (scanFlag) {
+            update("Configuring Scan");
+            potentialFiles.add(new File("C:/" + hemis));
+            potentialFiles.add(new File("D:/" + hemis));
+            potentialFiles.add(new File("E:/" + hemis));
+            potentialFiles.add(new File("F:/" + hemis));
+            potentialFiles.add(new File("G:/" + hemis));
+            potentialFiles.add(new File("H:/" + hemis));
+            potentialFiles.add(new File("I:/" + hemis));
+            potentialFiles.add(new File("J:/" + hemis));
+            potentialFiles.add(new File("L:/" + hemis)); // K:/ is taken
+            potentialFiles.add(new File("M:/" + hemis));
+            potentialFiles.add(new File("N:/" + hemis));
 
-        update("Configuring Scan");
-        potentialFiles.add(new File("C:/" + hemis));
-        potentialFiles.add(new File("D:/" + hemis));
-        potentialFiles.add(new File("E:/" + hemis));
-        potentialFiles.add(new File("F:/" + hemis));
-        potentialFiles.add(new File("G:/" + hemis));
-        potentialFiles.add(new File("H:/" + hemis));
-        potentialFiles.add(new File("I:/" + hemis));
-        potentialFiles.add(new File("J:/" + hemis));
-        potentialFiles.add(new File("L:/" + hemis)); // K:/ is taken
-        potentialFiles.add(new File("M:/" + hemis));
-        potentialFiles.add(new File("N:/" + hemis));
+            for (File currentFile : potentialFiles) {
+                String currentPath = currentFile.getAbsolutePath();
+                update("Scanning: " + currentPath);
+                if (currentFile.exists()) {
+                    update("Directory Found: " + currentPath);
+                    progress.setValue(10);
+                    payload = currentFile;
+                    if (probePayload()) {
+                        return true;
+                    }
+                }
+            }
 
-        for (File currentFile : potentialFiles) {
-            String currentPath = currentFile.getAbsolutePath();
-            update("Scanning: " + currentPath);
-            if (currentFile.exists()) {
-                update("Directory Found: " + currentPath);
+            popUp.showMessageDialog(null, "Directory Not Found \n Is The CD In The Machine?", "ERROR: Directory Not Found", 0);
+            update("Install Aborted");
+            progress.setValue(0);
+            return false;
+
+
+        } else {
+            String cdDir = cdLocation.getText();
+            File location = new File(cdDir + hemis);
+            String path = location.getAbsolutePath();
+            update("Checking: " + path);
+            if (location.exists()) {
+                update("Directory Found: " + path);
                 progress.setValue(10);
-                payload = currentFile;
+                payload = location;
                 if (probePayload()) {
                     return true;
                 }
             }
+            popUp.showMessageDialog(null, "Directory Not Found \n Is The CD In The Machine?", "ERROR: Directory Not Found", 0);
+            update("Install Aborted");
+            progress.setValue(0);
+            return false;
         }
-
-        popUp.showMessageDialog(null, "Directory Not Found \n Is The CD In The Machine?", "ERROR: Directory Not Found", 0);
-        update("Install Aborted");
-        progress.setValue(0);
-        return false;
-
-
     }
 
     private boolean probePayload() {
@@ -510,7 +559,7 @@ public class GUI extends javax.swing.JFrame {
         // change global hemis variable
         hemis = hemisNo.getText();
         // change colour of text if valid
-        if (hemisNo.getText().length() == 6){
+        if (hemisNo.getText().length() == 6) {
             hemisNo.setBackground(new java.awt.Color(153, 255, 153));
             hemisFlag.setText("Hemis Number Is Valid & Saved");
         }
@@ -519,11 +568,11 @@ public class GUI extends javax.swing.JFrame {
     private void hemisNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hemisNoKeyReleased
         // change to red if invalid hemis
         // change to yellow of hemisNo.getText() != hemis (unchanged)
-        if (hemisNo.getText().length() != 6){
+        if (hemisNo.getText().length() != 6) {
             // invalid hemis number
             hemisNo.setBackground(new java.awt.Color(255, 102, 102)); // red
             hemisFlag.setText("Hemis Number Is Invalid");
-        } else if (hemisNo.getText().equals(hemis)){
+        } else if (hemisNo.getText().equals(hemis)) {
             // unchanged hemis number
             hemisNo.setBackground(new java.awt.Color(153, 255, 153)); // green
             hemisFlag.setText("Hemis Number Is Valid & Saved");
@@ -533,6 +582,20 @@ public class GUI extends javax.swing.JFrame {
             hemisFlag.setText("Hemis Number Is Valid & Unsaved");
         }
     }//GEN-LAST:event_hemisNoKeyReleased
+
+    private void scanCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanCheckBoxActionPerformed
+        // if yes, then disable text field, else enable text field
+
+        if (scanCheckBox.isSelected()) {
+            // box is selected
+            scanFlag = true;
+            cdLocation.setEnabled(false);
+        } else {
+            // box isn't selected
+            scanFlag = false;
+            cdLocation.setEnabled(true);
+        }
+    }//GEN-LAST:event_scanCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -577,6 +640,7 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApply;
     private javax.swing.JPanel buildInfoWrap;
+    private javax.swing.JTextField cdLocation;
     private javax.swing.JPanel config;
     private javax.swing.JPanel configWrap;
     private javax.swing.JTextArea console;
@@ -587,7 +651,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField hemisNo;
     private javax.swing.JButton install;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblCDloc;
     private javax.swing.JLabel lblHemis;
     private javax.swing.JLabel lblHemis1;
     private javax.swing.JLabel lblLocate;
@@ -598,6 +663,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JOptionPane popUp;
     private javax.swing.JProgressBar progress;
     private javax.swing.JLabel releaseDate;
+    private javax.swing.JCheckBox scanCheckBox;
     private javax.swing.JTabbedPane tabbedPain;
     private javax.swing.JLabel title;
     private javax.swing.JLabel titleConfig;

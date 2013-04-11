@@ -216,8 +216,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="config" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="buildInfoWrap" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -226,7 +224,6 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="config" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                   <Component id="buildInfoWrap" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
@@ -238,7 +235,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="titleConfig" alignment="1" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
@@ -247,13 +244,24 @@
                                   <Component id="hemisNo" min="-2" pref="59" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="btnApply" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="lblHemis1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="hemisFlag" pref="284" max="32767" attributes="0"/>
+                                  <Component id="hemisFlag" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="scanCheckBox" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="lblCDloc" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="cdLocation" min="-2" pref="109" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="btnApply" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -275,9 +283,17 @@
                               <Component id="hemisFlag" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblHemis1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="174" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="btnApply" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="scanCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCDloc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cdLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="128" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -326,10 +342,30 @@
                     <Property name="text" type="java.lang.String" value="Status:"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JCheckBox" name="scanCheckBox">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Scan For CD Directory"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scanCheckBoxActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JSeparator" name="jSeparator2">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblCDloc">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="CD Location:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="cdLocation">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="D:/"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JSeparator" name="jSeparator1">
-            </Component>
             <Container class="javax.swing.JPanel" name="buildInfoWrap">
 
               <Layout>
@@ -342,17 +378,15 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblVersion" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="versionNo" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblRelease" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="41" max="32767" attributes="0"/>
-                                          <Component id="releaseDate" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="lblRelease" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblVersion" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="versionNo" min="-2" max="-2" attributes="0"/>
+                                      <Component id="releaseDate" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                               </Group>
                               <Component id="tp" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -377,8 +411,9 @@
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="tp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                           <Component id="year" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -400,7 +435,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="versionNo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="1.1.1"/>
+                    <Property name="text" type="java.lang.String" value="1.1.2"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblRelease">
