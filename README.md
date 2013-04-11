@@ -6,7 +6,11 @@ but has since blossomed into a generic WEBSCRP coursework installer
 
 ##Builds:
 
-### version 1.1.1 (Current)
+### version 1.1.2 (Current)
+
+Users can now enter a bespoke directory, as opposed to using the scanner
+
+### version 1.1.1
 
 Build info now visible
 
