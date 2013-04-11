@@ -77,6 +77,12 @@ public class GUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         buildInfoWrap = new javax.swing.JPanel();
         titleConfig1 = new javax.swing.JLabel();
+        lblVersion = new javax.swing.JLabel();
+        versionNo = new javax.swing.JLabel();
+        lblRelease = new javax.swing.JLabel();
+        releaseDate = new javax.swing.JLabel();
+        tp = new javax.swing.JLabel();
+        year = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEBSCRP Installer");
@@ -107,7 +113,7 @@ public class GUI extends javax.swing.JFrame {
             fileWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fileWrapLayout.createSequentialGroup()
                 .addGroup(fileWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                    .addComponent(fileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addGroup(fileWrapLayout.createSequentialGroup()
                         .addComponent(lblLocate)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -137,7 +143,7 @@ public class GUI extends javax.swing.JFrame {
         logWrap.setLayout(logWrapLayout);
         logWrapLayout.setHorizontalGroup(
             logWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
         logWrapLayout.setVerticalGroup(
             logWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +195,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
                         .addComponent(lblHemis1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hemisFlag, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))
+                        .addComponent(hemisFlag, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         configLayout.setVerticalGroup(
@@ -214,18 +220,59 @@ public class GUI extends javax.swing.JFrame {
         titleConfig1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleConfig1.setText("Build Info");
 
+        lblVersion.setText("Version:");
+
+        versionNo.setText("1.1.1");
+
+        lblRelease.setText("Release:");
+
+        releaseDate.setText("11/04/2013");
+
+        tp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tp.setText("Todd Perry");
+
+        year.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        year.setText("2013");
+
         javax.swing.GroupLayout buildInfoWrapLayout = new javax.swing.GroupLayout(buildInfoWrap);
         buildInfoWrap.setLayout(buildInfoWrapLayout);
         buildInfoWrapLayout.setHorizontalGroup(
             buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleConfig1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+            .addComponent(titleConfig1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buildInfoWrapLayout.createSequentialGroup()
+                .addGroup(buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(year, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, buildInfoWrapLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(buildInfoWrapLayout.createSequentialGroup()
+                                .addComponent(lblVersion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(versionNo))
+                            .addGroup(buildInfoWrapLayout.createSequentialGroup()
+                                .addComponent(lblRelease)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addComponent(releaseDate))))
+                    .addComponent(tp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         buildInfoWrapLayout.setVerticalGroup(
             buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buildInfoWrapLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleConfig1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVersion)
+                    .addComponent(versionNo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRelease)
+                    .addComponent(releaseDate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(year))
         );
 
         javax.swing.GroupLayout configWrapLayout = new javax.swing.GroupLayout(configWrap);
@@ -236,7 +283,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(config, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buildInfoWrap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         configWrapLayout.setVerticalGroup(
@@ -259,11 +306,14 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(lblProgress)
                         .addGap(42, 42, 42)
-                        .addComponent(currentAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(currentAction, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(install))
-                    .addComponent(tabbedPain, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tabbedPain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -542,12 +592,18 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblHemis1;
     private javax.swing.JLabel lblLocate;
     private javax.swing.JLabel lblProgress;
+    private javax.swing.JLabel lblRelease;
+    private javax.swing.JLabel lblVersion;
     private javax.swing.JPanel logWrap;
     private javax.swing.JOptionPane popUp;
     private javax.swing.JProgressBar progress;
+    private javax.swing.JLabel releaseDate;
     private javax.swing.JTabbedPane tabbedPain;
     private javax.swing.JLabel title;
     private javax.swing.JLabel titleConfig;
     private javax.swing.JLabel titleConfig1;
+    private javax.swing.JLabel tp;
+    private javax.swing.JLabel versionNo;
+    private javax.swing.JLabel year;
     // End of variables declaration//GEN-END:variables
 }
