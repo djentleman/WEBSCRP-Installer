@@ -17,8 +17,10 @@ public class GUI extends javax.swing.JFrame {
      * Creates new form GUI
      */
     private File payload;
+    private String hemis; // HEMIS number, defaults as 612136
 
     public GUI() {
+        hemis = "612136";
         initComponents();
     }
 
@@ -64,6 +66,17 @@ public class GUI extends javax.swing.JFrame {
         logWrap = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
+        configWrap = new javax.swing.JPanel();
+        config = new javax.swing.JPanel();
+        hemisNo = new javax.swing.JTextField();
+        lblHemis = new javax.swing.JLabel();
+        titleConfig = new javax.swing.JLabel();
+        btnApply = new javax.swing.JButton();
+        hemisFlag = new javax.swing.JLabel();
+        lblHemis1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        buildInfoWrap = new javax.swing.JPanel();
+        titleConfig1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEBSCRP Installer");
@@ -94,7 +107,7 @@ public class GUI extends javax.swing.JFrame {
             fileWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fileWrapLayout.createSequentialGroup()
                 .addGroup(fileWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                    .addComponent(fileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addGroup(fileWrapLayout.createSequentialGroup()
                         .addComponent(lblLocate)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -124,7 +137,7 @@ public class GUI extends javax.swing.JFrame {
         logWrap.setLayout(logWrapLayout);
         logWrapLayout.setHorizontalGroup(
             logWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
         );
         logWrapLayout.setVerticalGroup(
             logWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,6 +145,108 @@ public class GUI extends javax.swing.JFrame {
         );
 
         tabbedPain.addTab("Instalation Console", logWrap);
+
+        hemisNo.setBackground(new java.awt.Color(153, 255, 153));
+        hemisNo.setText("612136");
+        hemisNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                hemisNoKeyReleased(evt);
+            }
+        });
+
+        lblHemis.setText("Hemis Number:");
+
+        titleConfig.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        titleConfig.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleConfig.setText("Config");
+
+        btnApply.setText("Apply");
+        btnApply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyActionPerformed(evt);
+            }
+        });
+
+        hemisFlag.setText("Hemis Number Is Valid & Saved");
+
+        lblHemis1.setText("Status:");
+
+        javax.swing.GroupLayout configLayout = new javax.swing.GroupLayout(config);
+        config.setLayout(configLayout);
+        configLayout.setHorizontalGroup(
+            configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titleConfig, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+                        .addComponent(lblHemis)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hemisNo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnApply))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configLayout.createSequentialGroup()
+                        .addComponent(lblHemis1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hemisFlag, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        configLayout.setVerticalGroup(
+            configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(configLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleConfig)
+                .addGap(7, 7, 7)
+                .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hemisNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHemis))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(configLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hemisFlag)
+                    .addComponent(lblHemis1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(btnApply)
+                .addContainerGap())
+        );
+
+        titleConfig1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        titleConfig1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleConfig1.setText("Build Info");
+
+        javax.swing.GroupLayout buildInfoWrapLayout = new javax.swing.GroupLayout(buildInfoWrap);
+        buildInfoWrap.setLayout(buildInfoWrapLayout);
+        buildInfoWrapLayout.setHorizontalGroup(
+            buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titleConfig1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+        );
+        buildInfoWrapLayout.setVerticalGroup(
+            buildInfoWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buildInfoWrapLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleConfig1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout configWrapLayout = new javax.swing.GroupLayout(configWrap);
+        configWrap.setLayout(configWrapLayout);
+        configWrapLayout.setHorizontalGroup(
+            configWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(configWrapLayout.createSequentialGroup()
+                .addComponent(config, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(buildInfoWrap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        configWrapLayout.setVerticalGroup(
+            configWrapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(config, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+            .addComponent(buildInfoWrap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        tabbedPain.addTab("Configure/Build Info", configWrap);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,14 +332,17 @@ public class GUI extends javax.swing.JFrame {
         ArrayList<File> potentialFiles = new ArrayList<File>();
 
         update("Configuring Scan");
-        potentialFiles.add(new File("C:/612136"));
-        potentialFiles.add(new File("D:/612136"));
-        potentialFiles.add(new File("E:/612136"));
-        potentialFiles.add(new File("F:/612136"));
-        potentialFiles.add(new File("G:/612136"));
-        potentialFiles.add(new File("H:/612136"));
-        potentialFiles.add(new File("I:/612136"));
-        potentialFiles.add(new File("J:/612136"));
+        potentialFiles.add(new File("C:/" + hemis));
+        potentialFiles.add(new File("D:/" + hemis));
+        potentialFiles.add(new File("E:/" + hemis));
+        potentialFiles.add(new File("F:/" + hemis));
+        potentialFiles.add(new File("G:/" + hemis));
+        potentialFiles.add(new File("H:/" + hemis));
+        potentialFiles.add(new File("I:/" + hemis));
+        potentialFiles.add(new File("J:/" + hemis));
+        potentialFiles.add(new File("L:/" + hemis)); // K:/ is taken
+        potentialFiles.add(new File("M:/" + hemis));
+        potentialFiles.add(new File("N:/" + hemis));
 
         for (File currentFile : potentialFiles) {
             String currentPath = currentFile.getAbsolutePath();
@@ -307,6 +425,8 @@ public class GUI extends javax.swing.JFrame {
         // INSTALL THE WEBSCRP!
         payload = null; // nullify payload
         progress.setValue(0); // init progress bar
+        tabbedPain.setSelectedIndex(1);
+        update("Beggning Install");
         long start = System.currentTimeMillis();
 
         if (fileExists()) {
@@ -335,6 +455,34 @@ public class GUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_installActionPerformed
+
+    private void btnApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyActionPerformed
+        // change global hemis variable
+        hemis = hemisNo.getText();
+        // change colour of text if valid
+        if (hemisNo.getText().length() == 6){
+            hemisNo.setBackground(new java.awt.Color(153, 255, 153));
+            hemisFlag.setText("Hemis Number Is Valid & Saved");
+        }
+    }//GEN-LAST:event_btnApplyActionPerformed
+
+    private void hemisNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hemisNoKeyReleased
+        // change to red if invalid hemis
+        // change to yellow of hemisNo.getText() != hemis (unchanged)
+        if (hemisNo.getText().length() != 6){
+            // invalid hemis number
+            hemisNo.setBackground(new java.awt.Color(255, 102, 102)); // red
+            hemisFlag.setText("Hemis Number Is Invalid");
+        } else if (hemisNo.getText().equals(hemis)){
+            // unchanged hemis number
+            hemisNo.setBackground(new java.awt.Color(153, 255, 153)); // green
+            hemisFlag.setText("Hemis Number Is Valid & Saved");
+        } else {
+            // valid but changed
+            hemisNo.setBackground(new java.awt.Color(255, 204, 102)); // amber
+            hemisFlag.setText("Hemis Number Is Valid & Unsaved");
+        }
+    }//GEN-LAST:event_hemisNoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -377,12 +525,21 @@ public class GUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApply;
+    private javax.swing.JPanel buildInfoWrap;
+    private javax.swing.JPanel config;
+    private javax.swing.JPanel configWrap;
     private javax.swing.JTextArea console;
     private javax.swing.JLabel currentAction;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JPanel fileWrap;
+    private javax.swing.JLabel hemisFlag;
+    private javax.swing.JTextField hemisNo;
     private javax.swing.JButton install;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblHemis;
+    private javax.swing.JLabel lblHemis1;
     private javax.swing.JLabel lblLocate;
     private javax.swing.JLabel lblProgress;
     private javax.swing.JPanel logWrap;
@@ -390,5 +547,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JProgressBar progress;
     private javax.swing.JTabbedPane tabbedPain;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel titleConfig;
+    private javax.swing.JLabel titleConfig1;
     // End of variables declaration//GEN-END:variables
 }
