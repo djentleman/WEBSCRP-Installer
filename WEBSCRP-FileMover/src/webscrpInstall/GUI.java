@@ -532,7 +532,12 @@ public class GUI extends javax.swing.JFrame {
             File target = getSelectedFile();
             if (isHtdocs(target)) {
                 if (directoryExists()) {
-                    moveFiles(payload, target);
+                    File innerDir = new File(target.getAbsolutePath() + "\\" + hemis);
+                    if (innerDir.exists() == false){
+                        innerDir.mkdir();
+                        update("Creating Directory:" + innerDir.getAbsolutePath());
+                    }
+                    moveFiles(payload, innerDir);
                     progress.setValue(100);
                     long end = System.currentTimeMillis();
                     long elapsed = end - start;
